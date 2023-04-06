@@ -24,6 +24,10 @@ public class Node {
         outEdges.add(edge);
     }
 
+    public List<Edge> getOutEdges(){
+        return outEdges;
+    }
+
     public void addAttribute(String key, String value){
         attributes.put(key, value);
     }

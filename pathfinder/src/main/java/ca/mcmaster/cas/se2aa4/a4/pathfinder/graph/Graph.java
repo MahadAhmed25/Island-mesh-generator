@@ -38,6 +38,14 @@ public class Graph {
         return null; // node with id not found
     }
 
+    public List<Node> getNodes(){
+        return nodes;
+    }
+
+    public Edge getEdge(int index){
+        return edges.get(index);
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
