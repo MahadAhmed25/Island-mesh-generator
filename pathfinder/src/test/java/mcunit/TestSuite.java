@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TestSuite implements Test {
+
     private final Set<Test> contents = new HashSet<>();
     @Override
     public final void run(TestReport collector) {

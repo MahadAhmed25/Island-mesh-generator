@@ -46,7 +46,6 @@ public class islandGenerator {
         mesh = new Temp(mesh).enrichTemp(); //index 4
         mesh = new Biomes(mesh).enrichBiomes();
         
-        
 
         // Seed generation
         SeedGen seedGen = new SeedGen();

@@ -31,7 +31,7 @@ public class GraphShortestPath implements PathFinder {
         Set<Node> visitedNodes = new HashSet<>(); // visited nodes
         
         // initialize tentative distances and add all nodes to unvisited nodes
-        for (Node node : graph.getNodes()) {
+        for (Node node : graph.getNodesList()) {
             if (node.equals(start)) {
                 distances.put(node, 0.0);
             } else {

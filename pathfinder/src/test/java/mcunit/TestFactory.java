@@ -3,6 +3,7 @@ package mcunit;
 import java.lang.reflect.Method;
 
 public class TestFactory {
+
     private static final String TEST_PREFIX = "test_";
 
     public Test build(Class suite) {

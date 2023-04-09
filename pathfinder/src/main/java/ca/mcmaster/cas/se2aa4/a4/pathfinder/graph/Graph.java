@@ -17,12 +17,27 @@ public class Graph {
     }
 
     public void addNode(int id) {
-        Node node = new Node(id);
-        adjacencyList.putIfAbsent(node, new ArrayList<>());
-        nodes.add(node);
+        Node node = getNode(id);
+        if (node == null) {
+            node = new Node(id);
+            adjacencyList.putIfAbsent(node, new ArrayList<>());
+            nodes.add(node);
+        }
+    }
+
+    public void addNode(Node node){
+        if(getNode(node.getId()) == null){
+            adjacencyList.putIfAbsent(node, new ArrayList<>());
+            nodes.add(node);
+        }
     }
 
     public void addEdge(Node node1, Node node2) {
+        // Check if the edge already exists
+        if (adjacencyList.get(node1).contains(node2) || adjacencyList.get(node2).contains(node1)) 
+            return;
+    
+        // Add the new edge
         Edge edge = new Edge(node1, node2);
         adjacencyList.get(node1).add(node2);
         adjacencyList.get(node2).add(node1);
@@ -38,8 +53,12 @@ public class Graph {
         return null; // node with id not found
     }
 
-    public List<Node> getNodes(){
+    public List<Node> getNodesList(){
         return nodes;
+    }
+
+    public List<Edge> getEdgesList(){
+        return edges;
     }
 
     public Edge getEdge(int index){

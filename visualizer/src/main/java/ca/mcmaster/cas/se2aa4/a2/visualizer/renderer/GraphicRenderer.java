@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Path2D;
 import java.util.Iterator;
 import java.util.Optional;
@@ -38,7 +39,7 @@ public class GraphicRenderer implements Renderer {
                 canvas.setColor(fill.get());
                 Stroke stroke = new BasicStroke(10);
                 canvas.setStroke(stroke);
-                Vertex v1 = aMesh.getVertices(s.getV1Idx());
+                Vertex v1 = aMesh.getVertices(s.getV1Idx());    
                 Vertex v2 = aMesh.getVertices(s.getV2Idx());
                 canvas.drawLine((int)v1.getX(), (int)v1.getY(),(int) v2.getX(), (int)v2.getY());
             }
