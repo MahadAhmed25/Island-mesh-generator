@@ -74,7 +74,7 @@ public class graphTest {
     @Test
     public void makeSureDuplicateEdgeDoesntGetAdded(){
         int size = this.graph.getEdgesList().size();
-        this.graph.addEdge(this.graph.getNode(1), this.graph.getNode(2));
+        this.graph.addEdge(this.graph.getNode(2), this.graph.getNode(1));
         assertEquals(this.graph.getEdgesList().size(), size);
     }
 
