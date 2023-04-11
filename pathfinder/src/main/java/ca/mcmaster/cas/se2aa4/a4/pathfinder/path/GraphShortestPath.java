@@ -49,6 +49,7 @@ public class GraphShortestPath implements PathFinder {
                 Node node = end;
                 while (node != null) {
                     shortestPath.add(0, node);
+                    System.out.println(shortestPath.toString());
                     node = predecessors.get(node);
                 }
                 return shortestPath;
@@ -70,6 +71,7 @@ public class GraphShortestPath implements PathFinder {
         }
         
         // end node is not reachable from start node
+        System.out.println("no path was found");
         return null;
 
 

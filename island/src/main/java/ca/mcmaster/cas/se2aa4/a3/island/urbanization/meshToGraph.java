@@ -3,15 +3,15 @@ package ca.mcmaster.cas.se2aa4.a3.island.urbanization;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a4.pathfinder.graph.Graph;
 
-public class meshToGraph {
+public class MeshToGraph{
     
     private Structs.Mesh aMesh;
 
-    public meshToGraph(Structs.Mesh mesh){
+    public MeshToGraph(Structs.Mesh mesh){
         this.aMesh = mesh;
     }
 
-    public void convert(){
+    public Graph convert(){
 
         Graph graph = new Graph();
 
@@ -25,10 +25,12 @@ public class meshToGraph {
             for(int idx: p.getNeighborIdxsList()){
                 Structs.Polygon pNeighbor = aMesh.getPolygons(idx);
                 graph.addEdge(graph.getNode(p.getCentroidIdx()), graph.getNode(pNeighbor.getCentroidIdx()));
+                
             }
         }
+
+        return graph;
  
     }
-
-
 }
+
