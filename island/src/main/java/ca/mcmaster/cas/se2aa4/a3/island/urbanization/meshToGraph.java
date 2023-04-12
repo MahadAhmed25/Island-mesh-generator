@@ -23,11 +23,10 @@ public class MeshToGraph{
         //Connect all neighboring centroids with graph edges
         for(Structs.Polygon p: aMesh.getPolygonsList()){
             for(int idx: p.getNeighborIdxsList()){
-                Structs.Polygon pNeighbor = aMesh.getPolygons(idx);
-                graph.addEdge(graph.getNode(p.getCentroidIdx()), graph.getNode(pNeighbor.getCentroidIdx()));
-                
+                graph.addEdge(graph.getNode(p.getCentroidIdx()), graph.getNode(aMesh.getPolygons(idx).getCentroidIdx()));
             }
         }
+
 
         return graph;
  

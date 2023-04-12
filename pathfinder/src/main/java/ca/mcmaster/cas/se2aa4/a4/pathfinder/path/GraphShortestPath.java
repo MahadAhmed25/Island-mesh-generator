@@ -2,6 +2,7 @@ package ca.mcmaster.cas.se2aa4.a4.pathfinder.path;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,17 +42,20 @@ public class GraphShortestPath implements PathFinder {
         }
         
         // loop until we reach the end node or there are no more nodes to visit
+        System.out.println("*");
         while (!unvisitedNodes.isEmpty()) {
             Node current = unvisitedNodes.poll();
+                    
             if (current.equals(end)) {
+
                 // we have found the shortest path, reconstruct it using predecessors and return it
                 List<Node> shortestPath = new ArrayList<>();
                 Node node = end;
                 while (node != null) {
-                    shortestPath.add(0, node);
-                    System.out.println(shortestPath.toString());
+                    shortestPath.add(node);
                     node = predecessors.get(node);
                 }
+                Collections.reverse(shortestPath); // reverse the list to get the path from start to end
                 return shortestPath;
             }
             visitedNodes.add(current);

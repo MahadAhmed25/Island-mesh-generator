@@ -22,8 +22,9 @@ public class StarNetwork {
         this.graph = new MeshToGraph(aMesh).convert();
         this.cityNodes = new ArrayList<>();
         findCities();
-        
     }
+        
+   
 
     public void findCities(){
 
@@ -37,7 +38,7 @@ public class StarNetwork {
 
     public Structs.Mesh connectRoads(){
 
-        System.out.println(graph.toString());
+        //System.out.println(graph.toString());
 
         Structs.Property roadd = Structs.Property.newBuilder()
                 .setKey("rgb_color")
@@ -45,12 +46,13 @@ public class StarNetwork {
                 .build();
 
         PathFinder path = new GraphShortestPath(graph);
+
         Structs.Mesh.Builder cloneMesh = Structs.Mesh.newBuilder();
         cloneMesh.addAllVertices(aMesh.getVerticesList());
         cloneMesh.addAllSegments(aMesh.getSegmentsList());
         cloneMesh.addAllPolygons(aMesh.getPolygonsList());
 
-        List<Node> l = path.findPath(graph.getNode(967), graph.getNode(615));
+        List<Node> l = path.findPath(graph.getNode(cityNodes.get(0)), graph.getNode(cityNodes.get(1)));
         
         System.out.println("////////");
         for(Node n: l){ 
