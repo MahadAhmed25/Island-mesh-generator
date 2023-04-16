@@ -51,7 +51,7 @@ Inputs:
 7. --elevation argument include volcano/rockymountain/both
 
 ```
-java -jar island/island.jar -i img/irregular.mesh -o img/output.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland --elevation volcano
+java -jar island/island.jar -i img/irregular.mesh -o img/output.mesh --mode lagoon --shape circle --lakes 10 --rivers 10 --aquifers 20 --biomes grassland --elevation volcano --cities 3
 ```
 
 ## Visualizing the Island

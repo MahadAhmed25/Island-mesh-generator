@@ -14,6 +14,7 @@ public class Configuration {
     public static final String SEED = "seed";
     public static final String RIVERS = "rivers";
     public static final String ELEVATION = "elevation";
+    public static final String CITIES = "cities";
 
     private CommandLine cli;
 
@@ -70,6 +71,10 @@ public class Configuration {
         return this.cli.getOptionValue(ELEVATION);
     }
 
+    public String cities(){
+        return this.cli.getOptionValue(CITIES);
+    }
+
     private Options options() {
         Options options = new Options();
         options.addOption(new Option(INPUT, true, "Input file (MESH)"));
@@ -123,6 +128,12 @@ public class Configuration {
                 .hasArg()
                 .argName("elevation")
                 .desc("elevation options")
+                .build());
+        options.addOption(Option.builder()
+                .longOpt(CITIES)
+                .hasArg()
+                .argName("cities")
+                .desc("# of cities")
                 .build());
         return options;
     }
