@@ -17,7 +17,7 @@ public class Graph {
     }
 
     public void addNode(int id) {
-        Node node = getNode(id);
+        Node node = getNode(id); //check if node exists
         if (node == null) {
             node = new Node(id);
             adjacencyList.putIfAbsent(node, new ArrayList<>());

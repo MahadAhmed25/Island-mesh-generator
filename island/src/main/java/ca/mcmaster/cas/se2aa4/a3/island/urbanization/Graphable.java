@@ -3,11 +3,10 @@ package ca.mcmaster.cas.se2aa4.a3.island.urbanization;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
 import ca.mcmaster.cas.se2aa4.a4.pathfinder.graph.Graph;
 
-public class MeshToGraph{
-    
+public class Graphable {
     private Structs.Mesh aMesh;
 
-    public MeshToGraph(Structs.Mesh mesh){
+    public Graphable(Structs.Mesh mesh){
         this.aMesh = mesh;
     }
 
@@ -32,4 +31,3 @@ public class MeshToGraph{
  
     }
 }
-

@@ -17,8 +17,8 @@ import ca.mcmaster.cas.se2aa4.a4.pathfinder.graph.Node;
 
 public class GraphShortestPath implements PathFinder {
     private Graph graph;
-    Map<Node, Double> distances = new HashMap<>(); // tentative distances from start node to each node
-    Map<Node, Node> predecessors = new HashMap<>(); // predecessors of each node in the shortest path
+    Map<Node, Double> distances = new HashMap<>(); 
+    Map<Node, Node> predecessors = new HashMap<>(); 
     
     public GraphShortestPath(Graph graph) {
         this.graph = graph;
@@ -28,8 +28,8 @@ public class GraphShortestPath implements PathFinder {
     public List<Node> findPath(Node start, Node end) {
         
 
-        PriorityQueue<Node> unvisitedNodes = new PriorityQueue<>(Comparator.comparingDouble(distances::get)); // nodes not visited yet
-        Set<Node> visitedNodes = new HashSet<>(); // visited nodes
+        PriorityQueue<Node> unvisitedNodes = new PriorityQueue<>(Comparator.comparingDouble(distances::get)); 
+        Set<Node> visitedNodes = new HashSet<>(); 
         
         // initialize tentative distances and add all nodes to unvisited nodes
         for (Node node : graph.getNodesList()) {
@@ -41,21 +41,21 @@ public class GraphShortestPath implements PathFinder {
             unvisitedNodes.offer(node);
         }
         
-        // loop until we reach the end node or there are no more nodes to visit
-        System.out.println("*");
+        
         while (!unvisitedNodes.isEmpty()) {
             Node current = unvisitedNodes.poll();
+            //System.out.println(current.getId()); //TEST: check to see if nodes are being visited
                     
             if (current.equals(end)) {
 
-                // we have found the shortest path, reconstruct it using predecessors and return it
+                
                 List<Node> shortestPath = new ArrayList<>();
                 Node node = end;
                 while (node != null) {
                     shortestPath.add(node);
                     node = predecessors.get(node);
                 }
-                Collections.reverse(shortestPath); // reverse the list to get the path from start to end
+                Collections.reverse(shortestPath); 
                 return shortestPath;
             }
             visitedNodes.add(current);
@@ -75,7 +75,6 @@ public class GraphShortestPath implements PathFinder {
         }
         
         // end node is not reachable from start node
-        System.out.println("no path was found");
         return null;
 
 

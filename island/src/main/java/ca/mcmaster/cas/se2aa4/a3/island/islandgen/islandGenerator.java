@@ -45,8 +45,7 @@ public class islandGenerator {
         mesh = registerElevation(mesh);
         mesh = new Beaches(mesh).enrichBeaches();
         mesh = new Cities(2, mesh).addCapital();
-        StarNetwork a = new StarNetwork(mesh);
-        mesh = a.connectRoads();
+        mesh = new StarNetwork(mesh).connectRoads();
         mesh = new Plains().addElevation(mesh); 
         mesh = new Temp(mesh).enrichTemp(); //index 4
         mesh = new Biomes(mesh).enrichBiomes();
