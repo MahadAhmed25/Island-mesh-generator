@@ -1,4 +1,4 @@
-# Assignment A2: Mesh Generator
+# Mesh Generator
 
 -   Mahad Ahmed [ahmem73@mcmaster.ca]
 -   Saad Salman [salmam12@mcmaster.ca]
@@ -7,7 +7,7 @@
 ## Installation instructions
 
 ```
-mosser@azrael A2 % mvn install
+% mvn install
 ```
 
 It creates two jars:
@@ -20,8 +20,8 @@ It creates two jars:
 ### Generating a mesh, grid or irregular
 
 ```
-mosser@azrael A2 % java -jar generator/generator.jar -k grid -h 1080 -w 2000 -p 2000 -s 20 -o img/grid.mesh
-mosser@azrael A2 % java -jar generator/generator.jar -k irregular -h 2000 -w 2000 -p 1000 -s 20 -o img/irregular.mesh
+% java -jar generator/generator.jar -k grid -h 1080 -w 2000 -p 2000 -s 20 -o img/grid.mesh
+% java -jar generator/generator.jar -k irregular -h 2000 -w 2000 -p 1000 -s 20 -o img/irregular.mesh
 ```
 
 One can run the generator with `-help` as option to see the different command line arguments that are available
@@ -29,10 +29,10 @@ One can run the generator with `-help` as option to see the different command li
 ## Visualizing a mesh, (regular or debug)
 
 ```
-mosser@azrael A2 % java -jar visualizer/visualizer.jar -i img/grid.mesh -o img/grid.svg
-mosser@azrael A2 % java -jar visualizer/visualizer.jar -i img/grid.mesh -o img/grid_debug.svg -x
-mosser@azrael A2 % java -jar visualizer/visualizer.jar -i img/irregular.mesh -o img/irregular.svg
-mosser@azrael A2 % java -jar visualizer/visualizer.jar -i img/irregular.mesh -o img/irregular_debug.svg -x
+% java -jar visualizer/visualizer.jar -i img/grid.mesh -o img/grid.svg
+% java -jar visualizer/visualizer.jar -i img/grid.mesh -o img/grid_debug.svg -x
+% java -jar visualizer/visualizer.jar -i img/irregular.mesh -o img/irregular.svg
+% java -jar visualizer/visualizer.jar -i img/irregular.mesh -o img/irregular_debug.svg -x
 ```
 
 Note: PDF versions of the SVG files were created with `rsvg-convert`
