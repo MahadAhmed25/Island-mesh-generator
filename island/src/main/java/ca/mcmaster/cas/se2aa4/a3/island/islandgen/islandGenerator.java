@@ -1,9 +1,9 @@
 package ca.mcmaster.cas.se2aa4.a3.island.islandgen;
 
 import java.io.IOException;
-import java.io.ObjectInputFilter.Config;
-
-import org.apache.commons.cli.AmbiguousOptionException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.UnaryOperator;
 
 import ca.mcmaster.cas.se2aa4.a2.io.MeshFactory;
 import ca.mcmaster.cas.se2aa4.a2.io.Structs;
@@ -34,23 +34,12 @@ public class islandGenerator {
     }
 
     public Structs.Mesh generate() throws IOException {
-        // biomeCond = (config.biomes() == null) ? false : true;
         biomeArg = (config.biomes());
         Structs.Mesh mesh = registerShape();
-        if (config.mode() != null && config.mode().equals("lagoon"))
-            mesh = new Lagoon2(mesh).build(); // adds lagoon to mesh
-        mesh = new Aquifers(mesh).enrichAquifers(config.aquifer()); // adds aquifer
-        mesh = new Lakes(mesh).generateLakes(Integer.parseInt(config.lakes()));
-        mesh = new Rivers(mesh).generateRivers(Integer.parseInt(config.rivers()));
-        mesh = registerElevation(mesh);
-        mesh = new Beaches(mesh).enrichBeaches();
-        mesh = new Cities(Integer.parseInt(config.cities()), mesh).addCapital();
-        mesh = new StarNetwork(mesh).connectRoads();
-        mesh = new Plains().addElevation(mesh); 
-        mesh = new Temp(mesh).enrichTemp(); //index 4
-        mesh = new Biomes(mesh).enrichBiomes();
 
-        
+        for (UnaryOperator<Structs.Mesh> step : buildPipeline()) {
+            mesh = step.apply(mesh);
+        }
 
         // Seed generation
         SeedGen seedGen = new SeedGen();
@@ -61,6 +50,27 @@ public class islandGenerator {
         System.out.println("SEED: " + seed);
 
         return mesh; // returns the mesh
+    }
+
+    private List<UnaryOperator<Structs.Mesh>> buildPipeline() {
+        List<UnaryOperator<Structs.Mesh>> steps = new ArrayList<>();
+
+        if (config.mode() != null && config.mode().equals("lagoon")) {
+            steps.add(m -> new Lagoon2(m).build());
+        }
+
+        steps.add(m -> new Aquifers(m).enrichAquifers(config.aquifer()));
+        steps.add(m -> new Lakes(m).generateLakes(Integer.parseInt(config.lakes())));
+        steps.add(m -> new Rivers(m).generateRivers(Integer.parseInt(config.rivers())));
+        steps.add(this::registerElevation);
+        steps.add(m -> new Beaches(m).enrichBeaches());
+        steps.add(m -> new Cities(Integer.parseInt(config.cities()), m).addCapital());
+        steps.add(m -> new StarNetwork(m).connectRoads());
+        steps.add(new Plains()::addElevation);
+        steps.add(m -> new Temp(m).enrichTemp()); // index 4
+        steps.add(m -> new Biomes(m).enrichBiomes());
+
+        return steps;
     }
 
     public Structs.Mesh registerElevation(Structs.Mesh mesh){
