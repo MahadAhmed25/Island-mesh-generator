@@ -34,11 +34,12 @@ public class Graph {
 
     public void addEdge(Node node1, Node node2) {
         // Check if the edge already exists
-        if (adjacencyList.get(node1).contains(node2) || adjacencyList.get(node2).contains(node1)) 
+        if (adjacencyList.get(node1).contains(node2) || adjacencyList.get(node2).contains(node1))
             return;
-    
+
         // Add the new edge
         Edge edge = new Edge(node1, node2);
+        edge.setWeight(1); // default weight for unweighted graphs
         adjacencyList.get(node1).add(node2);
         adjacencyList.get(node2).add(node1);
         edges.add(edge);
