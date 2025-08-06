@@ -17,20 +17,19 @@ import ca.mcmaster.cas.se2aa4.a4.pathfinder.graph.Node;
 
 public class GraphShortestPath implements PathFinder {
     private Graph graph;
-    Map<Node, Double> distances = new HashMap<>(); 
-    Map<Node, Node> predecessors = new HashMap<>(); 
-    
+
     public GraphShortestPath(Graph graph) {
         this.graph = graph;
     }
-    
+
     @Override
     public List<Node> findPath(Node start, Node end) {
-        
 
-        PriorityQueue<Node> unvisitedNodes = new PriorityQueue<>(Comparator.comparingDouble(distances::get)); 
-        Set<Node> visitedNodes = new HashSet<>(); 
-        
+        Map<Node, Double> distances = new HashMap<>();
+        Map<Node, Node> predecessors = new HashMap<>();
+        PriorityQueue<Node> unvisitedNodes = new PriorityQueue<>(Comparator.comparingDouble(distances::get));
+        Set<Node> visitedNodes = new HashSet<>();
+
         // initialize tentative distances and add all nodes to unvisited nodes
         for (Node node : graph.getNodesList()) {
             if (node.equals(start)) {
@@ -40,27 +39,25 @@ public class GraphShortestPath implements PathFinder {
             }
             unvisitedNodes.offer(node);
         }
-        
-        
+
+
         while (!unvisitedNodes.isEmpty()) {
             Node current = unvisitedNodes.poll();
-            //System.out.println(current.getId()); //TEST: check to see if nodes are being visited
-                    
+
             if (current.equals(end)) {
 
-                
                 List<Node> shortestPath = new ArrayList<>();
                 Node node = end;
                 while (node != null) {
                     shortestPath.add(node);
                     node = predecessors.get(node);
                 }
-                Collections.reverse(shortestPath); 
+                Collections.reverse(shortestPath);
                 return shortestPath;
             }
             visitedNodes.add(current);
             for (Edge edge : current.getOutEdges()) {
-                Node neighbor = edge.getDestination();
+                Node neighbor = edge.getSource().equals(current) ? edge.getDestination() : edge.getSource();
                 if (visitedNodes.contains(neighbor)) {
                     continue;
                 }
@@ -73,11 +70,8 @@ public class GraphShortestPath implements PathFinder {
                 }
             }
         }
-        
+
         // end node is not reachable from start node
         return null;
-
-
-
     }
 }
